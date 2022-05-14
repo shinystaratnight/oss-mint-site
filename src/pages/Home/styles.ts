@@ -40,6 +40,10 @@ export const ConnectWalletButton = styled.button`
   padding: 7px 12px;
   display: flex;
   align-items: center;
+
+  &:hover {
+    background-color: #1a0547;
+  }
 `
 
 export const Banner = styled.div`
