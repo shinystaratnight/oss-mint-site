@@ -1,11 +1,8 @@
 import React from 'react'
+import ProgressBar from '@ramonak/react-progress-bar'
 import Counter from '../../components/Counter'
 import CounterSeparator from '../../components/CounterSeparator'
-import GradientLabel from '../../components/GradientLabel'
 import * as Element from './styles'
-import { Discord } from '@styled-icons/bootstrap/Discord'
-import { Twitter } from '@styled-icons/bootstrap/Twitter'
-import { Telegram } from '@styled-icons/bootstrap/Telegram'
 import TwitterIcon from '../../components/TwitterIcon'
 import DiscordIcon from '../../components/DiscordIcon'
 import TelegramIcon from '../../components/TelegramIcon'
@@ -167,7 +164,7 @@ const Home = () => {
           </div>
         </Element.CounterSection>
 
-        <Element.CounterSection>
+        <div className="container">
           <div className="section-container">
             <div>
               <p>Mint - 1st round</p>
@@ -178,17 +175,30 @@ const Home = () => {
               </div>
             </div>
             
-            <div style={{display: "flex"}}>
-              <div>
-                <p>6,900 dope Angels and</p>
-                <p>Demons NFTs living on</p>
-                <p>the Ethereum Blockchain</p>
+            <div className="row px-4">
+              <div className="col-lg-6">
+                <div style={{textAlign: "left"}}>
+                  <p>6,900 dope Angels and</p>
+                  <p>Demons NFTs living on</p>
+                  <p>the Ethereum Blockchain</p>
+                </div>
               </div>
-              <div>
-                <p>1100 minted</p>
-                <p>2300 available</p>
-                <p>6900 total supply</p>
+              <div className="col-lg-6">
+                <div style={{textAlign: "right"}}>
+                  <p>1100 minted</p>
+                  <p>2300 available</p>
+                  <p>6900 total supply</p>
+                </div>
               </div>
+            </div>
+            <div style={{width: '500px'}}>
+            <ProgressBar
+              completed={40}
+              height="14px"
+              isLabelVisible={false}
+              bgColor="var(--label-color)"
+              baseBgColor="#261d38"
+            />
             </div>
             <div className="stats-container">
               <Element.StatsDisplay>
@@ -198,7 +208,7 @@ const Home = () => {
               </Element.StatsDisplay>
             </div>
           </div>
-        </Element.CounterSection>
+        </div>
       </div>
     </React.Fragment>
   )
