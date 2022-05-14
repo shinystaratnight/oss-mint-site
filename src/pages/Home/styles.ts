@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { ArrowRight } from '@styled-icons/feather/ArrowRight'
+import { Ethereum } from '@styled-icons/simple-icons/Ethereum'
+
 
 export const Navbar = styled.div`
   padding-top: 1rem;
@@ -42,7 +44,7 @@ export const ConnectWalletButton = styled.button`
 
 export const Banner = styled.div`
   background: radial-gradient(49.17% 49.17% at 49.1% 100%, #140C45 0%, #090718 100%);
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 200px);
 `
 
 export const BannerContent = styled.div`
@@ -67,19 +69,25 @@ export const BannerContent = styled.div`
   }
 `
 
-export const BannerTitle = styled.h2`
+export const GradientLabel = styled.h2`
   background: var(--label-color);
   background-size: 400% 400%!important;
   background-clip: text!important;
   -webkit-background-clip: text!important;
   -webkit-text-fill-color: transparent!important;
   background-color: var(--white-color);
-  font-size: 72px;
   font-weight: 700;
-  line-height: 1;
-  display: flex;
+  line-height: 1.3
 `
 
+export const BannerTitle = styled(GradientLabel)`
+  font-size: 72px;
+  text-align: center;
+
+  @media screen and (max-width: 768px) {
+    font-size: 60px;
+  }
+`
 
 export const PictureAlignmentWrapper = styled.div`  
   display: flex;
@@ -298,3 +306,104 @@ export const PictureAlignment = styled.div`
     }
   }
 `
+export const BeforeMintSection = styled.div`
+
+`
+
+export const CounterSection = styled.div`
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+
+  .section-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 64px;
+    gap: 64px;
+  }
+
+  .counters-container {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  }
+
+  .stats-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    grid-gap: 64px;
+    gap: 64px;
+
+    @media screen and (max-width: 960px) {
+      flex-direction: column;
+    }
+  }
+`
+
+export const Title = styled(GradientLabel)`
+  font-size: 60px;
+`
+
+export const SubTitle = styled(GradientLabel)`
+  font-size:36px;
+  text-align: center;
+
+  @media screen and (max-width: 768px) {
+    font-size: 28px;
+  }
+`
+
+export const EthereumIcon = styled(Ethereum)`
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  background: rgb(98, 126, 234);
+  border-radius: 20px;
+`
+
+export const StatsDisplay = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  grid-gap: 8px;
+  gap: 8px;
+
+  .label {
+    color: #5b6587;
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  .content {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    color: var(--white-color);
+  }
+`
+
+export const SocialLinkSection = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  grid-gap: 16px;
+  gap: 16px;
+
+  p {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+  }
+
+  .social-icons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    grid-gap: 32px;
+    gap: 32px;
+  }
+`
+
