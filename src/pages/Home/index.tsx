@@ -8,17 +8,46 @@ import TelegramIcon from '../../components/TelegramIcon'
 import NumberField from '../../components/NumberField'
 import Button from '../../components/Button'
 import ProgressBar from '../../components/ProgressBar'
+import ConnectWallet from '../../components/ConnectWallet'
+import SwitchNetwork from '../../components/SwitchNetwork'
+import 'rsuite/dist/rsuite.min.css'
 
 const Home = () => {
+  const [openConnect, setOpenConnect] = React.useState(false);
+  const handleOpenConnect = () => setOpenConnect(true);
+  const handleCloseConnect = () => setOpenConnect(false);
+
+  const [openNetwork, setOpenNetwork] = React.useState(false);
+  const handleOpenNetwork = () => setOpenNetwork(true);
+  const handleCloseNetwork = () => setOpenNetwork(false);
+
   return (
     <React.Fragment>
+      <Element.Modal backdrop={true} open={openConnect} onClose={handleCloseConnect}>
+        <Element.Modal.Header>
+          <Element.Modal.Title>Connect to a wallet</Element.Modal.Title>
+        </Element.Modal.Header>
+        <Element.Modal.Body>
+          <ConnectWallet />
+        </Element.Modal.Body>
+      </Element.Modal>
+
+      <Element.Modal backdrop={true} open={openNetwork} onClose={handleCloseNetwork}>
+        <Element.Modal.Header>
+          <Element.Modal.Title>Choose network</Element.Modal.Title>
+        </Element.Modal.Header>
+        <Element.Modal.Body>
+          <SwitchNetwork />
+        </Element.Modal.Body>
+      </Element.Modal>
+
       <div className="container">
         <Element.Navbar>
           <a className="logo" href="#">
             <img src="logo.png" width={60} height={60} alt="" />
             <span>OSS MINT</span>
           </a>
-          <Element.ConnectWalletButton>
+          <Element.ConnectWalletButton onClick={handleOpenConnect}>
             Connect Wallet
             <Element.ArrowRightIcon />
           </Element.ConnectWalletButton>
@@ -288,7 +317,7 @@ const Home = () => {
                 <p className="m-0 ms-3">Please switch your metamask to Ethereum Mainnet network in order to take a part in the mint</p>
               </div>
               <div>
-                <Element.SwitchNetworkButton>
+                <Element.SwitchNetworkButton onClick={handleOpenNetwork}>
                   Switch Network
                 </Element.SwitchNetworkButton>
               </div>

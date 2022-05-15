@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import { ArrowRight } from '@styled-icons/feather/ArrowRight'
 import { Ethereum } from '@styled-icons/simple-icons/Ethereum'
 import { DotFill } from '@styled-icons/octicons/DotFill'
-import { Exclamation } from '@styled-icons/bootstrap/Exclamation';
+import { Exclamation } from '@styled-icons/bootstrap/Exclamation'
+import RModal from 'rsuite/Modal'
 
 export const Navbar = styled.div`
   padding-top: 1rem;
@@ -512,5 +513,27 @@ export const SwitchNetworkButton = styled.button`
 
   &:hover {
     background-color: #1a0547;
+  }
+`
+export const Modal = styled(RModal)`
+  .rs-modal-content {
+    background-color: rgb(91, 71, 133);
+  }
+
+  .rs-modal-header {
+    display: flex;
+    align-items: center;
+
+    .rs-modal-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white-color);
+    }
+
+    .rs-modal-header-close {
+      font-size: 18px;
+      line-height: 24px;
+      color: var(--white-color);
+    }
   }
 `
