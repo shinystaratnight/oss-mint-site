@@ -312,9 +312,6 @@ export const PictureAlignment = styled.div`
     }
   }
 `
-export const BeforeMintSection = styled.div`
-
-`
 
 export const CounterSection = styled.div`
   padding-top: 8rem;
@@ -442,7 +439,7 @@ export const HeadSection = styled.div`
   display: flex;
   justify-content: space-between;
 
-  @media screen and (max-width: 920px) {
+  @media screen and (max-width: 960px) {
     flex-direction: column;
   }
 
@@ -459,7 +456,7 @@ export const ButtonsContainer = styled.div`
   grid-gap: 12px;
   gap: 12px;
 
-  @media screen and (max-width: 920px) {
+  @media screen and (max-width: 960px) {
     margin-top: 1.5rem;
   }
 `
@@ -492,10 +489,15 @@ export const NotificationSection = styled.div`
   border-radius: 8px;
   padding: 1rem 1rem;
   background-color: #261d38;
+
+  @media screen and (max-width: 960px) {
+    flex-direction: column;
+  }
 `
 
 export const ExclamationIcon = styled(Exclamation)`
   width: 36px;
+  min-width: 36px;
   height: 36px;
   border-radius: 20px;
   background: linear-gradient(to right, #9198e5, #29d5d9);
