@@ -1,11 +1,13 @@
 import React from 'react'
-import ProgressBar from '@ramonak/react-progress-bar'
 import Counter from '../../components/Counter'
 import CounterSeparator from '../../components/CounterSeparator'
 import * as Element from './styles'
 import TwitterIcon from '../../components/TwitterIcon'
 import DiscordIcon from '../../components/DiscordIcon'
 import TelegramIcon from '../../components/TelegramIcon'
+import NumberField from '../../components/NumberField'
+import Button from '../../components/Button'
+import ProgressBar from '../../components/ProgressBar'
 
 const Home = () => {
   return (
@@ -165,49 +167,133 @@ const Home = () => {
         </Element.CounterSection>
 
         <div className="container">
-          <div className="section-container">
-            <div>
+          <Element.MintSection>
+            <Element.HeadSection className="mb-5">
               <p>Mint - 1st round</p>
-              <div>
-                <button>Pending transaction</button>
-                <button>Live</button>
-                <button>1 of 2 Rounds</button>
-              </div>
-            </div>
+              <Element.ButtonsContainer>
+                <Element.StatusButton><Element.DotFillIcon color="#e5b447" />Pending transaction</Element.StatusButton>
+                <Element.StatusButton><Element.DotFillIcon color="#0cc712" />Live</Element.StatusButton>
+                <Element.StatusButton>1 of 2 Rounds</Element.StatusButton>
+              </Element.ButtonsContainer>
+            </Element.HeadSection>
             
-            <div className="row px-4">
+            <div className="row mb-5">
               <div className="col-lg-6">
-                <div style={{textAlign: "left"}}>
-                  <p>6,900 dope Angels and</p>
-                  <p>Demons NFTs living on</p>
-                  <p>the Ethereum Blockchain</p>
+                <Element.MintLeftSection>
+                  <Element.MintLabel>6,900 dope Angels and</Element.MintLabel>
+                  <Element.MintLabel>Demons NFTs living on</Element.MintLabel>
+                  <Element.MintLabel>the Ethereum Blockchain</Element.MintLabel>
+                </Element.MintLeftSection>
+              </div>
+              <div className="col-lg-6 mt-4 mt-lg-0">
+                <Element.MintRightSection>
+                  <Element.MintLabel>1100 minted</Element.MintLabel>
+                  <Element.MintLabel>2300 available</Element.MintLabel>
+                  <Element.MintLabel>6900 total supply</Element.MintLabel>
+                </Element.MintRightSection>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-6">
+                <div className="d-flex">
+                  <NumberField onChange={() => {}} />
+                  <div className="ms-2"></div>
+                  <Button onClick={() => {}}>Mint</Button>
+                </div>
+                <div className="stats-container mt-4">
+                  <Element.StatsDisplay>
+                    <div className="label">Price:</div>
+                    <Element.EthereumIcon />
+                    <div className="content">0,069 ETH</div>
+                  </Element.StatsDisplay>
                 </div>
               </div>
-              <div className="col-lg-6">
-                <div style={{textAlign: "right"}}>
-                  <p>1100 minted</p>
-                  <p>2300 available</p>
-                  <p>6900 total supply</p>
-                </div>
+              <div className="col-lg-6 mt-5 mt-lg-0">
+                <ProgressBar
+                  completed={15}
+                  start="1st round"
+                  end="1100/3400 minted"
+                />
+                <ProgressBar
+                  completed={40}
+                  start="You have minted"
+                  end="4/10"
+                  mt="24px"
+                />
               </div>
             </div>
-            <div style={{width: '500px'}}>
-            <ProgressBar
-              completed={40}
-              height="14px"
-              isLabelVisible={false}
-              bgColor="var(--label-color)"
-              baseBgColor="#261d38"
-            />
+          </Element.MintSection>
+        </div>
+
+        <div className="container">
+          <Element.MintSection>
+            <Element.HeadSection className="mb-5">
+              <p>Mint - 1st round</p>
+              <Element.ButtonsContainer>
+                <Element.StatusButton><Element.DotFillIcon color="#e5b447" />Pending transaction</Element.StatusButton>
+                <Element.StatusButton><Element.DotFillIcon color="#0cc712" />Live</Element.StatusButton>
+                <Element.StatusButton>1 of 2 Rounds</Element.StatusButton>
+              </Element.ButtonsContainer>
+            </Element.HeadSection>
+            
+            <div className="row mb-5">
+              <div className="col-lg-6">
+                <Element.MintLeftSection>
+                  <Element.MintLabel>6,900 dope Angels and</Element.MintLabel>
+                  <Element.MintLabel>Demons NFTs living on</Element.MintLabel>
+                  <Element.MintLabel>the Ethereum Blockchain</Element.MintLabel>
+                </Element.MintLeftSection>
+              </div>
+              <div className="col-lg-6 mt-4 mt-lg-0">
+                <Element.MintRightSection>
+                  <Element.MintLabel>1100 minted</Element.MintLabel>
+                  <Element.MintLabel>2300 available</Element.MintLabel>
+                  <Element.MintLabel>6900 total supply</Element.MintLabel>
+                </Element.MintRightSection>
+              </div>
             </div>
-            <div className="stats-container">
-              <Element.StatsDisplay>
-                <div className="label">Price:</div>
-                <Element.EthereumIcon />
-                <div className="content">0,069 ETH</div>
-              </Element.StatsDisplay>
+            <div className="row">
+              <div className="col-lg-6">
+                <div className="d-flex">
+                  <NumberField onChange={() => {}} />
+                  <div className="ms-2"></div>
+                  <Button onClick={() => {}}>Mint</Button>
+                </div>
+                <div className="stats-container mt-4">
+                  <Element.StatsDisplay>
+                    <div className="label">Price:</div>
+                    <Element.EthereumIcon />
+                    <div className="content">0,069 ETH</div>
+                  </Element.StatsDisplay>
+                </div>
+              </div>
+              <div className="col-lg-6 mt-5 mt-lg-0">
+                <ProgressBar
+                  completed={15}
+                  start="1st round"
+                  end="1100/3400 minted"
+                />
+                <ProgressBar
+                  completed={40}
+                  start="You have minted"
+                  end="4/10"
+                  mt="24px"
+                />
+              </div>
             </div>
-          </div>
+
+            <Element.NotificationSection className="mt-5">
+              <div className="d-flex align-items-center">
+                <Element.ExclamationIcon />
+                <p className="m-0 ms-3">Please switch your metamask to Ethereum Mainnet network in order to take a part in the mint</p>
+              </div>
+              <div>
+                <Element.SwitchNetworkButton>
+                  Switch Network
+                </Element.SwitchNetworkButton>
+              </div>
+            </Element.NotificationSection>
+          </Element.MintSection>
         </div>
       </div>
     </React.Fragment>

@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { ArrowRight } from '@styled-icons/feather/ArrowRight'
 import { Ethereum } from '@styled-icons/simple-icons/Ethereum'
-
+import { DotFill } from '@styled-icons/octicons/DotFill'
+import { Exclamation } from '@styled-icons/bootstrap/Exclamation';
 
 export const Navbar = styled.div`
   padding-top: 1rem;
@@ -411,3 +412,105 @@ export const SocialLinkSection = styled.div`
   }
 `
 
+export const MintSection = styled.div`
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+`
+
+export const MintLeftSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  grid-gap: 0px;
+  gap: 0px;
+`
+
+export const MintRightSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  grid-gap: 0px;
+  gap: 0px;
+`
+
+export const MintLabel = styled(GradientLabel)`
+  font-size: 26px;
+`
+
+export const HeadSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (max-width: 920px) {
+    flex-direction: column;
+  }
+
+  p {
+    margin: 0;
+    font-size: 28px;
+    line-height: 28px;
+    font-weight: 500;
+  }
+`
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  grid-gap: 12px;
+  gap: 12px;
+
+  @media screen and (max-width: 920px) {
+    margin-top: 1.5rem;
+  }
+`
+
+export const StatusButton = styled.div`
+  background: #261d38;
+  border: 2px solid var(--violet-color);
+  color: var(--white-color);
+  border-radius: 20px;
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+`
+
+type DotFillProps = {
+  color?: string
+}
+
+export const DotFillIcon = styled(DotFill)<DotFillProps>`
+  width: 20px;
+  height: 20px;
+  margin-right: 4px;
+  color: ${props => props.color ? props.color : "#fff"};
+`
+
+export const NotificationSection = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  padding: 1rem 1rem;
+  background-color: #261d38;
+`
+
+export const ExclamationIcon = styled(Exclamation)`
+  width: 36px;
+  height: 36px;
+  border-radius: 20px;
+  background: linear-gradient(to right, #9198e5, #29d5d9);
+  padding: 4px;  
+`
+
+export const SwitchNetworkButton = styled.button`
+  background: transparent;
+  border: 2px solid var(--violet-color);
+  color: var(--white-color);
+  border-radius: 20px;
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: #1a0547;
+  }
+`
