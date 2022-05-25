@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const CounterItem = styled.div`
   text-align: center;
@@ -12,8 +12,17 @@ export const CounterItem = styled.div`
     justify-content: center;
     align-items: center;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 852px) {
       width: 6rem;
+      height: 7rem;
+    }
+    @media screen and (max-width: 576px) {
+      width: 4rem;
+      height: 5rem;
+    }
+    @media screen and (max-width: 370px) {
+      width: 3rem;
+      height: 3.3rem;
     }
   }
 
@@ -22,11 +31,28 @@ export const CounterItem = styled.div`
     line-height: 90px;
     font-weight: 700;
     margin-bottom: 0;
+
+    @media screen and (max-width: 852px) {
+      font-size: 50px;
+      line-height: 75px;
+    }
+    @media screen and (max-width: 576px) {
+      font-size: 35px;
+      line-height: 50px;
+    }
+    @media screen and (max-width: 370px) {
+      font-size: 25px;
+      line-height: 40px;
+      font-weight: 500;
+    }
   }
 
   .unit {
     padding-top: 5px;
     font-weight: 500;
-  }
-`
 
+    @media screen and (max-width: 370px) {
+      font-size: 12px;
+    }
+  }
+`;
