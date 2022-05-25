@@ -1,9 +1,9 @@
-import styled from 'styled-components'
-import { ArrowRight } from '@styled-icons/feather/ArrowRight'
-import { Ethereum } from '@styled-icons/simple-icons/Ethereum'
-import { DotFill } from '@styled-icons/octicons/DotFill'
-import { Exclamation } from '@styled-icons/bootstrap/Exclamation'
-import RModal from 'rsuite/Modal'
+import styled from "styled-components";
+import { ArrowRight } from "@styled-icons/feather/ArrowRight";
+import { Ethereum } from "@styled-icons/simple-icons/Ethereum";
+import { DotFill } from "@styled-icons/octicons/DotFill";
+import { Exclamation } from "@styled-icons/bootstrap/Exclamation";
+import RModal from "rsuite/Modal";
 
 export const Navbar = styled.div`
   padding-top: 1rem;
@@ -22,17 +22,17 @@ export const Navbar = styled.div`
     align-items: center;
 
     span {
-      margin-left: .5rem;
+      margin-left: 0.5rem;
     }
   }
-`
+`;
 
 export const ArrowRightIcon = styled(ArrowRight)`
   width: 26px;
   height: 20px;
   vertical-align: middle;
   color: var(--white-color);
-`
+`;
 
 export const ConnectWalletButton = styled.button`
   background: #261d38;
@@ -46,12 +46,16 @@ export const ConnectWalletButton = styled.button`
   &:hover {
     background-color: #1a0547;
   }
-`
+`;
 
 export const Banner = styled.div`
-  background: radial-gradient(49.17% 49.17% at 49.1% 100%, #140C45 0%, #090718 100%);
+  background: radial-gradient(
+    49.17% 49.17% at 49.1% 100%,
+    #140c45 0%,
+    #090718 100%
+  );
   min-height: calc(100vh - 200px);
-`
+`;
 
 export const BannerContent = styled.div`
   grid-row: 5/7;
@@ -67,23 +71,32 @@ export const BannerContent = styled.div`
     grid-row: 6/9;
     grid-column: 5/11;
   }
-  
+
   @media screen and (max-width: 768px) {
     justify-content: flex-start;
     grid-row: 9/11;
     grid-column: 1/9;
   }
-`
+`;
 
 export const GradientLabel = styled.h2`
   background: var(--label-color);
-  background-size: 400% 400%!important;
-  background-clip: text!important;
-  -webkit-background-clip: text!important;
-  -webkit-text-fill-color: transparent!important;
+  background-size: 400% 400% !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
   background-color: var(--white-color);
   font-weight: 700;
-  line-height: 1.3
+  line-height: 1.3;
+`;
+
+export const HeaderTitle = styled(GradientLabel) `
+  font-size: 40px;
+  margin-left: 8px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 32px;
+  }
 `
 
 export const BannerTitle = styled(GradientLabel)`
@@ -93,15 +106,15 @@ export const BannerTitle = styled(GradientLabel)`
   @media screen and (max-width: 768px) {
     font-size: 60px;
   }
-`
+`;
 
-export const PictureAlignmentWrapper = styled.div`  
+export const PictureAlignmentWrapper = styled.div`
   display: flex;
   flex-grow: 1;
   justify-content: center;
   align-items: center;
-`
-  
+`;
+
 export const PictureAlignment = styled.div`
   display: grid;
   overflow: hidden;
@@ -132,7 +145,6 @@ export const PictureAlignment = styled.div`
     padding-right: 1rem;
   }
 
-  
   img {
     aspect-ratio: 1;
     -webkit-user-select: none;
@@ -168,8 +180,8 @@ export const PictureAlignment = styled.div`
   }
 
   img.picture-04 {
-    grid-row: 3/7;
-    grid-column: 3/7;
+    grid-row: 2/7;
+    grid-column: 4/7;
   }
 
   img.picture-05 {
@@ -178,8 +190,8 @@ export const PictureAlignment = styled.div`
   }
 
   img.picture-06 {
-    grid-row: 3/7;
-    grid-column: 3/7;
+    grid-row: 4/8;
+    grid-column: 2/6;
   }
 
   img.picture-07 {
@@ -188,8 +200,8 @@ export const PictureAlignment = styled.div`
   }
 
   img.picture-08 {
-    grid-row: 3/5;
-    grid-column: 1/3;
+    grid-row: 3/6;
+    grid-column: 2/4;
   }
 
   img.picture-09 {
@@ -212,50 +224,50 @@ export const PictureAlignment = styled.div`
       grid-row: 1/3;
       grid-column: 1/3;
     }
-  
+
     img.picture-02 {
       grid-row: 1/3;
       grid-column: 3/5;
     }
-  
+
     img.picture-03 {
       grid-row: 1/3;
       grid-column: 5/7;
     }
-  
+
     img.picture-04 {
       grid-row: 1/4;
       grid-column: 7/10;
     }
-  
+
     img.picture-05 {
       grid-row: 3/5;
       grid-column: 5/7;
     }
-  
+
     img.picture-06 {
       grid-row: 4/6;
       grid-column: 7/9;
     }
-  
+
     img.picture-07 {
       grid-row: 4/6;
       grid-column: 9/11;
     }
-  
+
     img.picture-08 {
       grid-row: 3/7;
       grid-column: 1/5;
     }
-  
+
     img.picture-09 {
       display: none;
     }
-  
+
     img.picture-10 {
       display: none;
     }
-  
+
     img.picture-11 {
       display: none;
     }
@@ -264,54 +276,55 @@ export const PictureAlignment = styled.div`
   @media screen and (max-width: 768px) {
     img.picture-01 {
       grid-row: 3/5;
-      grid-column: 1/3;
+      grid-column: 1/4;
     }
-  
+
     img.picture-02 {
       grid-row: 1/5;
       grid-column: 3/7;
     }
-  
+
     img.picture-03 {
       grid-row: 3/5;
-      grid-column: 7/9;
+      grid-column: 5/9;
     }
-  
+
     img.picture-04 {
       grid-row: 5/9;
       grid-column: 1/5;
     }
-  
+
     img.picture-05 {
-      grid-row: 5/8;
-      grid-column: 5/8;
+      display: none;
     }
-  
+
     img.picture-06 {
       display: none;
     }
-  
+
     img.picture-07 {
       display: none;
     }
-  
+
     img.picture-08 {
       display: none;
     }
-  
+
     img.picture-09 {
-      display: none;
+      grid-row: 6/9;
+      grid-column: 3/9;
+      display: block;
     }
-  
+
     img.picture-10 {
       display: none;
     }
-  
+
     img.picture-11 {
       display: none;
     }
   }
-`
+`;
 
 export const CounterSection = styled.div`
   padding-top: 8rem;
@@ -343,20 +356,20 @@ export const CounterSection = styled.div`
       flex-direction: column;
     }
   }
-`
+`;
 
 export const Title = styled(GradientLabel)`
   font-size: 60px;
-`
+`;
 
 export const SubTitle = styled(GradientLabel)`
-  font-size:36px;
+  font-size: 36px;
   text-align: center;
 
   @media screen and (max-width: 768px) {
     font-size: 28px;
   }
-`
+`;
 
 export const EthereumIcon = styled(Ethereum)`
   width: 24px;
@@ -364,7 +377,7 @@ export const EthereumIcon = styled(Ethereum)`
   padding: 4px;
   background: rgb(98, 126, 234);
   border-radius: 20px;
-`
+`;
 
 export const StatsDisplay = styled.div`
   display: flex;
@@ -385,7 +398,7 @@ export const StatsDisplay = styled.div`
     line-height: 30px;
     color: var(--white-color);
   }
-`
+`;
 
 export const SocialLinkSection = styled.div`
   display: flex;
@@ -394,6 +407,7 @@ export const SocialLinkSection = styled.div`
   justify-content: flex-start;
   grid-gap: 16px;
   gap: 16px;
+  margin-bottom: 24px;
 
   p {
     font-weight: 500;
@@ -408,12 +422,12 @@ export const SocialLinkSection = styled.div`
     grid-gap: 32px;
     gap: 32px;
   }
-`
+`;
 
 export const MintSection = styled.div`
   padding-top: 8rem;
   padding-bottom: 8rem;
-`
+`;
 
 export const MintLeftSection = styled.div`
   display: flex;
@@ -421,7 +435,7 @@ export const MintLeftSection = styled.div`
   align-items: flex-start;
   grid-gap: 0px;
   gap: 0px;
-`
+`;
 
 export const MintRightSection = styled.div`
   display: flex;
@@ -429,11 +443,11 @@ export const MintRightSection = styled.div`
   align-items: flex-end;
   grid-gap: 0px;
   gap: 0px;
-`
+`;
 
 export const MintLabel = styled(GradientLabel)`
   font-size: 26px;
-`
+`;
 
 export const HeadSection = styled.div`
   display: flex;
@@ -449,7 +463,7 @@ export const HeadSection = styled.div`
     line-height: 28px;
     font-weight: 500;
   }
-`
+`;
 
 export const ButtonsContainer = styled.div`
   display: flex;
@@ -459,7 +473,7 @@ export const ButtonsContainer = styled.div`
   @media screen and (max-width: 960px) {
     margin-top: 1.5rem;
   }
-`
+`;
 
 export const StatusButton = styled.div`
   background: #261d38;
@@ -469,18 +483,18 @@ export const StatusButton = styled.div`
   padding: 7px 12px;
   display: flex;
   align-items: center;
-`
+`;
 
 type DotFillProps = {
-  color?: string
-}
+  color?: string;
+};
 
 export const DotFillIcon = styled(DotFill)<DotFillProps>`
   width: 20px;
   height: 20px;
   margin-right: 4px;
-  color: ${props => props.color ? props.color : "#fff"};
-`
+  color: ${(props) => (props.color ? props.color : "#fff")};
+`;
 
 export const NotificationSection = styled.div`
   display: flex;
@@ -493,7 +507,7 @@ export const NotificationSection = styled.div`
   @media screen and (max-width: 960px) {
     flex-direction: column;
   }
-`
+`;
 
 export const ExclamationIcon = styled(Exclamation)`
   width: 36px;
@@ -501,8 +515,8 @@ export const ExclamationIcon = styled(Exclamation)`
   height: 36px;
   border-radius: 20px;
   background: linear-gradient(to right, #9198e5, #29d5d9);
-  padding: 4px;  
-`
+  padding: 4px;
+`;
 
 export const SwitchNetworkButton = styled.button`
   background: transparent;
@@ -516,10 +530,12 @@ export const SwitchNetworkButton = styled.button`
   &:hover {
     background-color: #1a0547;
   }
-`
+`;
 export const Modal = styled(RModal)`
   .rs-modal-content {
-    background-color: rgb(91, 71, 133);
+    background-color: rgb(6 4 26);
+    box-shadow: rgb(28 52 195 / 80%) 0px 1px 11px 2px;
+    border-radius: 20px;
   }
 
   .rs-modal-header {
@@ -538,4 +554,8 @@ export const Modal = styled(RModal)`
       color: var(--white-color);
     }
   }
-`
+
+  .rs-modal-body a:hover {
+    color: #b7b7b7;
+  }
+`;
