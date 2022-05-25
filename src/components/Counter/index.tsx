@@ -1,5 +1,5 @@
-import React from 'react'
-import * as Element from './styles'
+import React from "react";
+import * as Element from "./styles";
 
 interface Props {
   counter: number;
@@ -9,11 +9,13 @@ const Counter: React.FC<Props> = ({ counter, unit }) => {
   return (
     <Element.CounterItem>
       <div className="wrapper">
-        <p className="counter">{counter}</p>
+        <p className="counter">
+          {counter.toLocaleString("en-US", { minimumIntegerDigits: 2 })}
+        </p>
       </div>
       <p className="unit">{unit}</p>
     </Element.CounterItem>
-  )
-}
+  );
+};
 
-export default Counter
+export default Counter;

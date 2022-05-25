@@ -22,12 +22,12 @@ export interface AnalyzeData {
   price: BigNumber;
   maxSupply: number;
   supply: number;
+  maxPerUser: number;
 }
 
 export interface NftData {
-  tokenId: string;
+  tokenId: number;
   image: string;
-  rarity: Rarity;
 }
 
 export interface SerializedMintUserData {
@@ -44,14 +44,17 @@ interface MintPublicCoreProps {
   goldenMintStartAt: number;
   goldenMintEndAt: number;
   goldenMaxSupply: number;
+  goldenMaxPerUser: number;
   goldenSupply: number;
   silverMintStartAt: number;
   silverMintEndAt: number;
   silverMaxSupply: number;
+  silverMaxPerUser: number;
   silverSupply: number;
   commonMintStartAt: number;
   commonMintEndAt: number;
   commonMaxSupply: number;
+  commonMaxPerUser: number;
   commonSupply: number;
   totalSupply: number;
 }

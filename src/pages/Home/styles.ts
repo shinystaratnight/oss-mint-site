@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ArrowRight } from "@styled-icons/feather/ArrowRight";
-import { Ethereum } from "@styled-icons/simple-icons/Ethereum";
+import { Binance } from "@styled-icons/simple-icons/Binance";
 import { DotFill } from "@styled-icons/octicons/DotFill";
 import { Exclamation } from "@styled-icons/bootstrap/Exclamation";
 import RModal from "rsuite/Modal";
@@ -90,14 +90,14 @@ export const GradientLabel = styled.h2`
   line-height: 1.3;
 `;
 
-export const HeaderTitle = styled(GradientLabel) `
+export const HeaderTitle = styled(GradientLabel)`
   font-size: 40px;
   margin-left: 8px;
 
   @media screen and (max-width: 768px) {
     font-size: 32px;
   }
-`
+`;
 
 export const BannerTitle = styled(GradientLabel)`
   font-size: 72px;
@@ -371,12 +371,16 @@ export const SubTitle = styled(GradientLabel)`
   }
 `;
 
-export const EthereumIcon = styled(Ethereum)`
+export const BinanceIcon = styled(Binance)`
   width: 24px;
   height: 24px;
   padding: 4px;
-  background: rgb(98, 126, 234);
+  background: #f1b128;
   border-radius: 20px;
+
+  & > svg {
+    fill: #eee;
+  }
 `;
 
 export const StatsDisplay = styled.div`

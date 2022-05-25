@@ -25,6 +25,10 @@ const fetchMintPublicData = async (): Promise<SerializedMintPublicData> => {
     },
     {
       address: ossNftAddress,
+      name: "_goldenMaxPerUser",
+    },
+    {
+      address: ossNftAddress,
       name: "_goldenPrice",
     },
     {
@@ -42,6 +46,10 @@ const fetchMintPublicData = async (): Promise<SerializedMintPublicData> => {
     {
       address: ossNftAddress,
       name: "totalSupplySilver",
+    },
+    {
+      address: ossNftAddress,
+      name: "_silverMaxPerUser",
     },
     {
       address: ossNftAddress,
@@ -65,6 +73,10 @@ const fetchMintPublicData = async (): Promise<SerializedMintPublicData> => {
     },
     {
       address: ossNftAddress,
+      name: "_commonMaxPerUser",
+    },
+    {
+      address: ossNftAddress,
       name: "_commonPrice",
     },
     {
@@ -79,16 +91,19 @@ const fetchMintPublicData = async (): Promise<SerializedMintPublicData> => {
       [goldenMintEndAt],
       [goldenMaxSupply],
       [goldenSupply],
+      [goldenMaxPerUser],
       [goldenPrice],
       [silverMintStartAt],
       [silverMintEndAt],
       [silverMaxSupply],
       [silverSupply],
+      [silverMaxPerUser],
       [silverPrice],
       [commonMintStartAt],
       [commonMintEndAt],
       [commonMaxSupply],
       [commonSupply],
+      [commonMaxPerUser],
       [commonPrice],
       [totalSupply],
     ] = await multicall(ossNftABI, calls);
@@ -98,16 +113,19 @@ const fetchMintPublicData = async (): Promise<SerializedMintPublicData> => {
       goldenMintEndAt: Number(goldenMintEndAt._hex),
       goldenMaxSupply: Number(goldenMaxSupply._hex),
       goldenSupply: Number(goldenSupply._hex),
+      goldenMaxPerUser: Number(goldenMaxPerUser._hex),
       goldenPrice: new BigNumber(goldenPrice._hex).toJSON(),
       silverMintStartAt: Number(silverMintStartAt._hex),
       silverMintEndAt: Number(silverMintEndAt._hex),
       silverMaxSupply: Number(silverMaxSupply._hex),
       silverSupply: Number(silverSupply._hex),
+      silverMaxPerUser: Number(silverMaxPerUser._hex),
       silverPrice: new BigNumber(silverPrice._hex).toJSON(),
       commonMintStartAt: Number(commonMintStartAt._hex),
       commonMintEndAt: Number(commonMintEndAt._hex),
       commonMaxSupply: Number(commonMaxSupply._hex),
       commonSupply: Number(commonSupply._hex),
+      commonMaxPerUser: Number(commonMaxPerUser._hex),
       commonPrice: new BigNumber(commonPrice._hex).toJSON(),
       totalSupply: Number(totalSupply._hex),
     };

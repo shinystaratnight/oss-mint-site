@@ -28,11 +28,47 @@ export const useMintPublicData = (): DeserializedMintPublicData => {
   };
 };
 
-export const useMintUserData = (): DeserializedMintUserData => {
+const filterNft = (
+  tokenId,
+  goldenMaxSupply,
+  silverMaxSupply,
+  commonMaxSupply,
+  filterRarity?
+) => {
+  if (filterRarity === Rarity.GOLDEN) {
+    return tokenId < goldenMaxSupply;
+  }
+  if (filterRarity === Rarity.SILVER) {
+    return (
+      tokenId >= goldenMaxSupply && tokenId < goldenMaxSupply + silverMaxSupply
+    );
+  }
+  if (filterRarity === Rarity.COMMON) {
+    return (
+      tokenId >= goldenMaxSupply + silverMaxSupply &&
+      tokenId < goldenMaxSupply + silverMaxSupply + commonMaxSupply
+    );
+  }
+  return true;
+};
+
+export const useMintUserData = (rarity?: Rarity): DeserializedMintUserData => {
   const mintData = useSelector((state: State) => state.mint);
-  const { ethBalance, ...rest } = mintData.userData;
+  const { ethBalance, nfts } = mintData.userData;
+  const { goldenMaxSupply, silverMaxSupply, commonMaxSupply } =
+    mintData.publicData;
+  const filteredNfts = nfts.filter((nft) =>
+    filterNft(
+      nft.tokenId,
+      goldenMaxSupply,
+      silverMaxSupply,
+      commonMaxSupply,
+      rarity
+    )
+  );
+  console.log("filtered nfts ", filteredNfts)
   return {
-    ...rest,
+    nfts: filteredNfts,
     ethBalance: getBalanceAmount(new BigNumber(ethBalance)),
   };
 };
@@ -63,27 +99,31 @@ export const useMintDataAnalyze = (): AnalyzeData => {
     process: Process.NOT_DETERMINED,
     rarity: Rarity.GOLDEN,
     supply: 0,
+    maxPerUser: 0,
   });
 
-  useEffect(() => {
-    const {
-      goldenMintStartAt,
-      goldenMintEndAt,
-      goldenPrice,
-      goldenMaxSupply,
-      goldenSupply,
-      silverMintStartAt,
-      silverMintEndAt,
-      silverPrice,
-      silverMaxSupply,
-      silverSupply,
-      commonMintStartAt,
-      commonMintEndAt,
-      commonPrice,
-      commonMaxSupply,
-      commonSupply,
-    } = publicMintData;
+  const {
+    goldenMintStartAt,
+    goldenMintEndAt,
+    goldenPrice,
+    goldenMaxSupply,
+    goldenSupply,
+    goldenMaxPerUser,
+    silverMintStartAt,
+    silverMintEndAt,
+    silverPrice,
+    silverMaxSupply,
+    silverSupply,
+    silverMaxPerUser,
+    commonMintStartAt,
+    commonMintEndAt,
+    commonPrice,
+    commonMaxSupply,
+    commonSupply,
+    commonMaxPerUser,
+  } = publicMintData;
 
+  useEffect(() => {
     const currentTime = Math.floor(new Date().getTime() / 1000);
     if (goldenMintStartAt === 0) {
       setAnalyzeData({
@@ -109,6 +149,7 @@ export const useMintDataAnalyze = (): AnalyzeData => {
         price: goldenPrice,
         maxSupply: goldenMaxSupply,
         supply: goldenSupply,
+        maxPerUser: goldenMaxPerUser,
         process: Process.OPENED,
         rarity: Rarity.GOLDEN,
         endAt: goldenMintEndAt,
@@ -138,6 +179,7 @@ export const useMintDataAnalyze = (): AnalyzeData => {
         ...analyzeData,
         price: silverPrice,
         maxSupply: silverMaxSupply,
+        maxPerUser: silverMaxPerUser,
         supply: silverSupply,
         process: Process.OPENED,
         rarity: Rarity.SILVER,
@@ -169,6 +211,7 @@ export const useMintDataAnalyze = (): AnalyzeData => {
         price: commonPrice,
         maxSupply: commonMaxSupply,
         supply: commonSupply,
+        maxPerUser: commonMaxPerUser,
         process: Process.OPENED,
         rarity: Rarity.COMMON,
         endAt: commonMintEndAt,
@@ -183,6 +226,6 @@ export const useMintDataAnalyze = (): AnalyzeData => {
         rarity: Rarity.COMMON,
       });
     }
-  }, [baseRefresh, publicMintData]);
+  }, [baseRefresh]);
   return analyzeData;
 };

@@ -1,74 +1,167 @@
+import { useState } from "react";
+import { useWeb3React } from "@web3-react/core";
 import NumberField from "components/NumberField";
 import Button from "components/Button";
 import ProgressBar from "components/ProgressBar";
 import * as Element from "./styles";
+import { useMintDataAnalyze, useMintUserData } from "state/mint/hooks";
+import { Process, Rarity } from "state/types";
+import useMintNfts from "./hooks/useMintNfts";
+import { getDecimalAmount } from "utils/formatBalance";
+import { fetchMintPublicDataAsync, fetchMintUserDataAsync } from "state/mint";
+import { useAppDispatch } from "state";
 
 const Mint = () => {
+  const analyzeData = useMintDataAnalyze();
+  const { account } = useWeb3React();
+  const dispatch = useAppDispatch();
+  const { process, rarity, price, maxSupply, supply, maxPerUser } = analyzeData;
+  const userData = useMintUserData(rarity);
+  const { nfts: ownedNfts, ethBalance } = userData;
+  const [numToMint, setNumToMint] = useState("0");
+  const [pendingTx, setPendingTx] = useState(false);
+  const { onMint } = useMintNfts(rarity);
+
   return (
-    <div className="container">
-      <Element.MintSection>
-        <Element.HeadSection className="mb-5">
-          <p>Mint - 1st round</p>
-          <Element.ButtonsContainer>
-            <Element.StatusButton>
+    process === Process.OPENED && (
+      <div className="container">
+        <Element.MintSection>
+          <Element.HeadSection className="mb-5">
+            <p>
+              Mint -{" "}
+              {rarity === Rarity.GOLDEN
+                ? "1st"
+                : rarity === Rarity.SILVER
+                ? "2nd"
+                : "3rd"}{" "}
+              round
+            </p>
+            <Element.ButtonsContainer>
+              {/* <Element.StatusButton>
               <Element.DotFillIcon color="#e5b447" />
               Pending transaction
-            </Element.StatusButton>
-            <Element.StatusButton>
-              <Element.DotFillIcon color="#0cc712" />
-              Live
-            </Element.StatusButton>
-            <Element.StatusButton>1 of 2 Rounds</Element.StatusButton>
-          </Element.ButtonsContainer>
-        </Element.HeadSection>
+            </Element.StatusButton> */}
+              <Element.StatusButton>
+                <Element.DotFillIcon color="#0cc712" />
+                Live
+              </Element.StatusButton>
+              <Element.StatusButton>
+                {rarity === Rarity.GOLDEN
+                  ? "1"
+                  : rarity === Rarity.SILVER
+                  ? "2"
+                  : "3"}{" "}
+                of 3 Rounds
+              </Element.StatusButton>
+            </Element.ButtonsContainer>
+          </Element.HeadSection>
 
-        <div className="row mb-5">
-          <div className="col-lg-6">
-            <Element.MintLeftSection>
-              <Element.MintLabel>6,900 dope Angels and</Element.MintLabel>
-              <Element.MintLabel>Demons NFTs living on</Element.MintLabel>
-              <Element.MintLabel>the Ethereum Blockchain</Element.MintLabel>
-            </Element.MintLeftSection>
-          </div>
-          <div className="col-lg-6 mt-4 mt-lg-0">
-            <Element.MintRightSection>
-              <Element.MintLabel>1100 minted</Element.MintLabel>
-              <Element.MintLabel>2300 available</Element.MintLabel>
-              <Element.MintLabel>6900 total supply</Element.MintLabel>
-            </Element.MintRightSection>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-6">
-            <div className="d-flex">
-              <NumberField onChange={() => {}} />
-              <div className="ms-2"></div>
-              <Button onClick={() => {}}>Mint</Button>
+          <div className="row mb-5">
+            <div className="col-lg-6">
+              <Element.MintLeftSection>
+                <Element.MintLabel>Mint OS Sneakers</Element.MintLabel>
+                <Element.MintLabel>
+                  {rarity === Rarity.GOLDEN
+                    ? "Golden"
+                    : rarity === Rarity.SILVER
+                    ? "Silver"
+                    : "Common"}{" "}
+                  NFTs on the
+                </Element.MintLabel>
+                <Element.MintLabel>Binance Smart Chain</Element.MintLabel>
+              </Element.MintLeftSection>
             </div>
-            <div className="stats-container mt-4">
-              <Element.StatsDisplay>
-                <div className="label">Price:</div>
-                <Element.EthereumIcon />
-                <div className="content">0,069 ETH</div>
-              </Element.StatsDisplay>
+            <div className="col-lg-6 mt-4 mt-lg-0">
+              <Element.MintRightSection>
+                <Element.MintLabel>
+                  {supply.toLocaleString("en-US")} minted
+                </Element.MintLabel>
+                <Element.MintLabel>
+                  {(maxSupply - supply).toLocaleString("en-US")} available
+                </Element.MintLabel>
+                <Element.MintLabel>
+                  {maxSupply.toLocaleString("en-US")} total supply
+                </Element.MintLabel>
+              </Element.MintRightSection>
             </div>
           </div>
-          <div className="col-lg-6 mt-5 mt-lg-0">
-            <ProgressBar
-              completed={15}
-              start="1st round"
-              end="1100/3400 minted"
-            />
-            <ProgressBar
-              completed={40}
-              start="You have minted"
-              end="4/10"
-              mt="24px"
-            />
+          <div className="row">
+            <div className="col-lg-6">
+              <div className="d-flex">
+                <NumberField
+                  onChange={(value) => setNumToMint(value)}
+                  value={numToMint}
+                />
+                <div className="ms-2"></div>
+                <Button
+                  disabled={!account || Number(numToMint) < 1 || pendingTx}
+                  onClick={async () => {
+                    try {
+                      if (Number(numToMint) > 0) {
+                        setPendingTx(true);
+                        await onMint(
+                          Number(numToMint),
+                          getDecimalAmount(
+                            price.times(Number(numToMint))
+                          ).toJSON()
+                        );
+                        dispatch(fetchMintPublicDataAsync());
+                        dispatch(fetchMintUserDataAsync({ account }));
+                      }
+                    } catch (err) {
+                      console.error(err);
+                    } finally {
+                      setPendingTx(false);
+                    }
+                  }}
+                >
+                  Mint
+                </Button>
+              </div>
+              <div className="stats-container mt-4">
+                <Element.StatsDisplay>
+                  <div className="label">Price:</div>
+                  <Element.BinanceIcon />
+                  <div className="content">
+                    {price
+                      .toNumber()
+                      .toLocaleString("en-US", { maximumFractionDigits: 3 })}
+                    {Number(numToMint) > 0
+                      ? ` * ${Number(numToMint)} = ${(
+                          price.toNumber() * Number(numToMint)
+                        ).toLocaleString("en-US", {
+                          maximumFractionDigits: 3,
+                        })}`
+                      : ""}{" "}
+                    BNB
+                  </div>
+                </Element.StatsDisplay>
+              </div>
+            </div>
+            <div className="col-lg-6 mt-5 mt-lg-0">
+              <ProgressBar
+                completed={(supply / maxSupply) * 100}
+                start={`${
+                  rarity === Rarity.GOLDEN
+                    ? "1st"
+                    : rarity === Rarity.SILVER
+                    ? "2nd"
+                    : "3rd"
+                } round`}
+                end={`${supply}/${maxSupply} minted`}
+              />
+              {account && maxPerUser > 0 && (
+                <ProgressBar
+                  completed={(ownedNfts.length / maxPerUser) * 100}
+                  start="You have minted"
+                  end={`${ownedNfts.length}/${maxPerUser}`}
+                  mt="24px"
+                />
+              )}
+            </div>
           </div>
-        </div>
 
-        {/* <Element.NotificationSection className="mt-5">
+          {/* <Element.NotificationSection className="mt-5">
           <div className="d-flex align-items-center">
             <Element.ExclamationIcon />
             <p className="m-0 ms-3">
@@ -82,8 +175,9 @@ const Mint = () => {
             </Element.SwitchNetworkButton>
           </div>
         </Element.NotificationSection> */}
-      </Element.MintSection>
-    </div>
+        </Element.MintSection>
+      </div>
+    )
   );
 };
 

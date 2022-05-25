@@ -3,7 +3,7 @@ import { useMintDataAnalyze, useMintPublicData } from "state/mint/hooks";
 import { Process, Rarity } from "state/types";
 import * as Element from "./styles";
 
-const MiddleAnnounce = () => {
+const Announce = () => {
   const analyzeData = useMintDataAnalyze();
   const { process, rarity, price, maxSupply, supply } = analyzeData;
 
@@ -43,7 +43,7 @@ const MiddleAnnounce = () => {
               <div className="stats-container">
                 <Element.StatsDisplay>
                   <div className="label">Price:</div>
-                  <Element.EthereumIcon />
+                  <Element.BinanceIcon />
                   <div className="content">
                     {price.toNumber().toLocaleString("en-US", {
                       maximumFractionDigits: 3,
@@ -72,4 +72,4 @@ const MiddleAnnounce = () => {
   );
 };
 
-export default MiddleAnnounce;
+export default Announce;

@@ -1,55 +1,55 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState } from "react";
 
-import * as Element from './styles'
+import * as Element from "./styles";
 
 interface Props {
-  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  value: string;
+  onChange: (value) => void;
 }
 
 const NumberField: FC<Props> = (props) => {
+  const { value, onChange } = props;
+  const pattern = /^[0-9]*$/;
 
-  const { onChange } = props
-
-  const [innerVal, setInnerVal] = useState('0')
-
-  const pattern = /^[0-9]*$/
-  
   return (
-    <Element.FormControl className='position-relative'>
+    <Element.FormControl className="position-relative">
       <Element.InputForm
         type="text"
         className="form-control"
         id="exampleFormControlInput1"
         placeholder=""
-        value={innerVal}
+        value={value}
         onChange={(e) => {
           e.preventDefault();
-          if (e.target.value === '' || pattern?.test(e.target.value)) {
-            setInnerVal(parseInt(e.target.value).toString())
-            onChange(e)
-          } else {
-            setInnerVal(innerVal ?? '0')
+          if (e.target.value === "" || pattern?.test(e.target.value)) {
+            onChange(e.target.value);
           }
         }}
       />
       <Element.ControlBtn
-        className='btn position-absolute discount-btn'
+        className="btn position-absolute discount-btn"
         onClick={() => {
-          setInnerVal((parseInt(innerVal) - 1).toString())
+          if (parseInt(value) > 0) {
+            onChange((parseInt(value) - 1).toString());
+          }
         }}
       >
         <Element.ArrowDownIcon />
       </Element.ControlBtn>
       <Element.ControlBtn
         onClick={() => {
-          setInnerVal((parseInt(innerVal) + 1).toString())
+          if (parseInt(value) >= 0) {
+            onChange((parseInt(value) + 1).toString());
+          } else {
+            onChange("1");
+          }
         }}
-        className='btn position-absolute add-btn'
+        className="btn position-absolute add-btn"
       >
         <Element.ArrowUpIcon />
       </Element.ControlBtn>
     </Element.FormControl>
-  )
-}
+  );
+};
 
-export default NumberField
+export default NumberField;

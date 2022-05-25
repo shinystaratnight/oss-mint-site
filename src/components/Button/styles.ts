@@ -10,6 +10,7 @@ export const ButtonDom = styled.button`
   font-size: 16px;
   padding-left: 24px;
   padding-right: 24px;
+  cursor: pointer;
 
   &:hover {
     background-color: #1a0547 !important;

@@ -1,48 +1,68 @@
+import dateFormat from 'dateformat'
 import Counter from "components/Counter";
 import CounterSeparator from "components/CounterSeparator";
+import { useMintDataAnalyze } from "state/mint/hooks";
+import { Process, Rarity } from "state/types";
+import getTimePeriods from "utils/getTimePeriods";
 import * as Element from "./styles";
 
 const MintTimer = () => {
+  const analyzeData = useMintDataAnalyze();
+  const { process, rarity, untilSec, startAt, endAt, price, maxSupply } =
+    analyzeData;
+
+  const timePeriods = getTimePeriods(untilSec)
+
   return (
-    <Element.CounterSection>
+    process === Process.WAITING && (
+      <Element.CounterSection>
         <div className="section-container">
           <Element.SubTitle>
-            Wait for it! AngelBlock NFT will be available for minting in:
+            Wait for it! OS Sneakers NFT (
+            {rarity === Rarity.GOLDEN
+              ? "GOLDEN"
+              : rarity === Rarity.SILVER
+              ? "SILVER"
+              : "COMMON"}
+            ) will be available for minting in:
           </Element.SubTitle>
 
           <div className="counters-container">
-            <Counter counter={10} unit="Days" />
+            <Counter counter={timePeriods.days} unit="Days" />
             <CounterSeparator />
-            <Counter counter={2} unit="Hours" />
+            <Counter counter={timePeriods.hours} unit="Hours" />
             <CounterSeparator />
-            <Counter counter={26} unit="Minutes" />
+            <Counter counter={timePeriods.minutes} unit="Minutes" />
             <CounterSeparator />
-            <Counter counter={35} unit="Seconds" />
+            <Counter counter={timePeriods.seconds} unit="Seconds" />
           </div>
 
           <div className="stats-container">
             <Element.StatsDisplay>
               <div className="label">Price:</div>
-              <Element.EthereumIcon />
-              <div className="content">0,069 ETH</div>
+              <Element.BinanceIcon />
+              <div className="content">
+                {price
+                  .toNumber()
+                  .toLocaleString("en-US", { maximumFractionDigits: 3 })}{" "}
+                BNB
+              </div>
             </Element.StatsDisplay>
 
             <Element.StatsDisplay>
               <div className="label">Total Supply:</div>
-              <div className="content">6,900</div>
+              <div className="content">{maxSupply.toLocaleString("en-US")}</div>
             </Element.StatsDisplay>
 
             <Element.StatsDisplay>
               <div className="label">Mint Date:</div>
-              <div className="content">Tue, May 24th - 16:00 GMT</div>
+              <div className="content">{dateFormat(new Date(startAt * 1000), 'ddd, mmm dd HH:MM (Z)')}</div>
             </Element.StatsDisplay>
           </div>
-
-          
         </div>
       </Element.CounterSection>
+    )
+  );
+};
 
-  )
-}
-
-export default MintTimer
+export default MintTimer;
